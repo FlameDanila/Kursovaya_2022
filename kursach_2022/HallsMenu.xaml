@@ -1,0 +1,16 @@
+﻿<Window x:Class="kursach_2022.HallsMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:kursach_2022"
+        mc:Ignorable="d"
+       Title="Меню залов" Height="720" Width="1280" MinHeight="720" MinWidth="1280" MaxWidth="1280" MaxHeight="720" WindowStartupLocation="CenterScreen" Icon="Images/icon.png">
+    <Grid Background="#FF3F72AF">
+        <Border CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFDBE2EF" BorderBrush="#FF0F78BB" BorderThickness="1" Width="1124" Height="635">
+            <Grid x:Name="grid" Width="796" Height="500" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,118,0,0">
+           </Grid>
+        </Border>
+        <Image HorizontalAlignment="Center" Height="97" Margin="0,53,0,0" VerticalAlignment="Top" Width="212" Source="images/logo2.png" Stretch="Fill" StretchDirection="Both" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+    </Grid>
+</Window>

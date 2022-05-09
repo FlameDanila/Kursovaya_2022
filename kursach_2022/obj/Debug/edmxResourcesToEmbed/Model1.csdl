@@ -2,6 +2,8 @@
 <Schema Namespace="KassirModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="KassirEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Stuff" EntityType="KassirModel.Stuff" />
+    <EntitySet Name="Films" EntityType="KassirModel.Films" />
+    <EntitySet Name="Hall_1" EntityType="KassirModel.Hall_1" />
   </EntityContainer>
   <EntityType Name="Stuff">
     <Key>
@@ -13,5 +15,27 @@
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Films">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cost" Type="Int32" />
+    <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="folder" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Hall_1">
+    <Key>
+      <PropertyRef Name="numberOfRow" />
+    </Key>
+    <Property Name="numberOfRow" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="column1" Type="Int32" />
+    <Property Name="column2" Type="Int32" />
+    <Property Name="column3" Type="Int32" />
+    <Property Name="column4" Type="Int32" />
+    <Property Name="column5" Type="Int32" />
+    <Property Name="column6" Type="Int32" />
   </EntityType>
 </Schema>

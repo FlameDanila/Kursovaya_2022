@@ -26,5 +26,7 @@ namespace kursach_2022
         }
     
         public virtual DbSet<Stuff> Stuff { get; set; }
+        public virtual DbSet<Films> Films { get; set; }
+        public virtual DbSet<Hall_1> Hall_1 { get; set; }
     }
 }

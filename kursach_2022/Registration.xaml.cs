@@ -68,17 +68,15 @@ namespace kursach_2022
 
         private void LoginBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //List<Owners> OwnersLoginList = App.db.Owners.ToList();
-            //List<Purchasers> PurchasersLoginList = App.db.Purchasers.ToList();
+            List<Stuff> OwnersLoginList = App.db.Stuff.ToList();
 
-            //var LoginList = OwnersLoginList.Select(n => n.Login).ToList();
-            //LoginList.AddRange(PurchasersLoginList.Select(n => n.Login).ToList());
+            var LoginList = OwnersLoginList.Select(n => n.Login).ToList();
 
-            //if (LoginList.Contains(LoginBox.Text))
-            //{
-            //    Error.Visibility = Visibility.Visible;
-            //}
-            //else { Error.Visibility = Visibility.Hidden; }
+            if (LoginList.Contains(LoginBox.Text))
+            {
+                Error.Visibility = Visibility.Visible;
+            }
+            else { Error.Visibility = Visibility.Hidden; }
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -88,12 +86,12 @@ namespace kursach_2022
             Close();
         }
 
-        private void PreviewTextInput(object sender, TextCompositionEventArgs e)
+        public new void PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^а-яА-Я]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-        private void DigitsTextInput(object sender, TextCompositionEventArgs e)
+        public void DigitsTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);

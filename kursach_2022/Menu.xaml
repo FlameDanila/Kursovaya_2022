@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursach_2022"
         mc:Ignorable="d"
-      Title="Авторизация" Height="720" Width="1280" MinHeight="720" MinWidth="1280" Icon="Images/icon.png" WindowStartupLocation="CenterScreen">
+      Title="Меню" Height="720" Width="1280" MinHeight="720" MinWidth="1280" Icon="Images/icon.png" WindowStartupLocation="CenterScreen">
     <Grid Background="#FF3F72AF">
         <Border CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFDBE2EF" BorderBrush="#FF0F78BB" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Width="962" Height="530">
             <Grid Width="906" Height="470" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -32,7 +32,7 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button x:Name="korzinaButton" FontSize="30" Margin="777,22,0,0" Foreground="Black" Background="{x:Null}"  Width="91" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Click="korzinaButton_Click" BorderBrush="{x:Null}">
+                <Button x:Name="korzinaButton" FontSize="30" Margin="777,22,0,0" Content="..." Foreground="Black" Background="{x:Null}"  Width="91" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Click="korzinaButton_Click" BorderBrush="{x:Null}">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="15"/>

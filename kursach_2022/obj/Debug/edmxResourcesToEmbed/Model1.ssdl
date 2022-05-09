@@ -1,5 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Хранилище KassirModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Films">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="cost" Type="int" />
+    <Property Name="time" Type="nvarchar" MaxLength="50" />
+    <Property Name="folder" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Kassir.dbo.Hall_1" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Hall_1">
+    <Key>
+      <PropertyRef Name="numberOfRow" />
+    </Key>
+    <Property Name="numberOfRow" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="column1" Type="int" />
+    <Property Name="column2" Type="int" />
+    <Property Name="column3" Type="int" />
+    <Property Name="column4" Type="int" />
+    <Property Name="column5" Type="int" />
+    <Property Name="column6" Type="int" />
+  </EntityType>
   <EntityType Name="Stuff">
     <Key>
       <PropertyRef Name="Id" />
@@ -12,6 +36,18 @@
     <Property Name="Gender" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityContainer Name="Хранилище KassirModelContainer">
+    <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stuff" EntityType="Self.Stuff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hall_1" EntityType="Self.Hall_1" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Hall_1].[numberOfRow] AS [numberOfRow], 
+    [Hall_1].[column1] AS [column1], 
+    [Hall_1].[column2] AS [column2], 
+    [Hall_1].[column3] AS [column3], 
+    [Hall_1].[column4] AS [column4], 
+    [Hall_1].[column5] AS [column5], 
+    [Hall_1].[column6] AS [column6]
+    FROM [dbo].[Hall_1] AS [Hall_1]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

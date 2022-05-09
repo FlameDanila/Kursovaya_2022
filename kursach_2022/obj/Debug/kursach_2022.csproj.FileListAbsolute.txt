@@ -27,3 +27,5 @@ C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\Registration.g.
 C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\Registration.baml
 C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\Menu.g.cs
 C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\Menu.baml
+C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\HallsMenu.g.cs
+C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\HallsMenu.baml

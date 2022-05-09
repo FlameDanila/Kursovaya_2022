@@ -33,7 +33,7 @@ namespace kursach_2022
 
         private void hallsButton_Click(object sender, RoutedEventArgs e)
         {
-            Halls halls = new Halls();
+            HallsMenu halls = new HallsMenu();
             halls.Show();
             Close();
         }
