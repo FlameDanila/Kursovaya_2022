@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:kursach_2022"
         mc:Ignorable="d"
-         Title="Регистрация" Height="520" Width="1064" MinHeight="520" MinWidth="1064" MaxWidth="1064" MaxHeight="520" WindowStartupLocation="CenterScreen" Icon="Images/icon.png">
+        Title="Регистрация" Height="520" Width="1064" MinHeight="520" MinWidth="1064" MaxWidth="1064" MaxHeight="520" WindowStartupLocation="CenterScreen" Icon="Images/icon.png">
     <Grid Background="#FF3F72AF">
         <Border CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFDBE2EF" BorderBrush="#FF0F78BB" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Width="908" Height="444">
             <Grid Width="799" Height="504" VerticalAlignment="Center" Margin="0,0,-1,0" HorizontalAlignment="Center">

@@ -14,6 +14,7 @@
           <Property Name="cost" Type="int" />
           <Property Name="time" Type="nvarchar" MaxLength="50" />
           <Property Name="folder" Type="nvarchar" MaxLength="100" />
+          <Property Name="showTime" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "Kassir.dbo.Hall_1" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -28,6 +29,7 @@
           <Property Name="column4" Type="int" />
           <Property Name="column5" Type="int" />
           <Property Name="column6" Type="int" />
+          <Property Name="filmId" Type="int" />
         </EntityType>
         <EntityType Name="Stuff">
           <Key>
@@ -38,7 +40,7 @@
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-          <Property Name="Gender" Type="nchar" MaxLength="10" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="Хранилище KassirModelContainer">
           <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
@@ -51,7 +53,8 @@
     [Hall_1].[column3] AS [column3], 
     [Hall_1].[column4] AS [column4], 
     [Hall_1].[column5] AS [column5], 
-    [Hall_1].[column6] AS [column6]
+    [Hall_1].[column6] AS [column6], 
+    [Hall_1].[filmId] AS [filmId]
     FROM [dbo].[Hall_1] AS [Hall_1]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -63,7 +66,7 @@
           <EntitySet Name="Stuff" EntityType="KassirModel.Stuff" />
           <EntitySet Name="Films" EntityType="KassirModel.Films" />
           <EntitySet Name="Hall_1" EntityType="KassirModel.Hall_1" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Stuff">
           <Key>
             <PropertyRef Name="Id" />
@@ -73,7 +76,7 @@
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Films">
           <Key>
@@ -84,6 +87,7 @@
           <Property Name="cost" Type="Int32" />
           <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="folder" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="showTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Hall_1">
           <Key>
@@ -96,8 +100,9 @@
           <Property Name="column4" Type="Int32" />
           <Property Name="column5" Type="Int32" />
           <Property Name="column6" Type="Int32" />
+          <Property Name="filmId" Type="Int32" />
         </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -118,6 +123,7 @@
           <EntitySetMapping Name="Films">
             <EntityTypeMapping TypeName="KassirModel.Films">
               <MappingFragment StoreEntitySet="Films">
+                <ScalarProperty Name="showTime" ColumnName="showTime" />
                 <ScalarProperty Name="folder" ColumnName="folder" />
                 <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="cost" ColumnName="cost" />
@@ -129,6 +135,7 @@
           <EntitySetMapping Name="Hall_1">
             <EntityTypeMapping TypeName="KassirModel.Hall_1">
               <MappingFragment StoreEntitySet="Hall_1">
+                <ScalarProperty Name="filmId" ColumnName="filmId" />
                 <ScalarProperty Name="column6" ColumnName="column6" />
                 <ScalarProperty Name="column5" ColumnName="column5" />
                 <ScalarProperty Name="column4" ColumnName="column4" />
@@ -139,7 +146,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

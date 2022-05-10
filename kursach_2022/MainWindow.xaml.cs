@@ -48,6 +48,7 @@ namespace kursach_2022
                         Menu menu = new Menu();
                         menu.Show();
                         Close();
+                        App.userId = stuffList[i].Id;
                         break;
                     }
                     else

@@ -41,10 +41,10 @@ namespace kursach_2022
                     {
                         Stuff purchasers = new Stuff()
                         {
-                            Name = LastNameBox.Text + " " + FirstNameBox.Text + " " + MiddleNameBox.Text,
-                            Phone = PhoneBox.Text,
-                            Login = LoginBox.Text,
-                            Password = PasswordBox.Text,
+                            Name = LastNameBox.Text.Replace(" ", "") + " " + FirstNameBox.Text.Replace(" ", "") + " " + MiddleNameBox.Text.Replace(" ", ""),
+                            Phone = PhoneBox.Text.Replace(" ", ""),
+                            Login = LoginBox.Text.Replace(" ", ""),
+                            Password = PasswordBox.Text.Replace(" ", ""),
                             Gender = FloorCombo.Text
                         };
 
@@ -88,12 +88,12 @@ namespace kursach_2022
 
         public new void PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^а-яА-Я]+");
+            Regex regex = new Regex("[^а-яА-Я]+[W]+");
             e.Handled = regex.IsMatch(e.Text);
         }
         public void DigitsTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
+            Regex regex = new Regex("[^0-9]+[W]+");
             e.Handled = regex.IsMatch(e.Text);
         }
     }

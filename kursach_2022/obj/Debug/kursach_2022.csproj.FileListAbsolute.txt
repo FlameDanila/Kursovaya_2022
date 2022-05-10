@@ -29,3 +29,7 @@ C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\Menu.g.cs
 C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\Menu.baml
 C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\HallsMenu.g.cs
 C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\HallsMenu.baml
+C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\ChangesWindow.g.cs
+C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\ChangesWindow.baml
+C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\TicketWindow.g.cs
+C:\Users\Danila\source\repos\kursach_2022\kursach_2022\obj\Debug\TicketWindow.baml

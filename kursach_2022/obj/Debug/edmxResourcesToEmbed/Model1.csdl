@@ -14,7 +14,7 @@
     <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Films">
     <Key>
@@ -25,6 +25,7 @@
     <Property Name="cost" Type="Int32" />
     <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="folder" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="showTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Hall_1">
     <Key>
@@ -37,5 +38,6 @@
     <Property Name="column4" Type="Int32" />
     <Property Name="column5" Type="Int32" />
     <Property Name="column6" Type="Int32" />
+    <Property Name="filmId" Type="Int32" />
   </EntityType>
 </Schema>

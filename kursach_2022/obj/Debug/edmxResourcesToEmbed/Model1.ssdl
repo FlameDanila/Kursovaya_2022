@@ -9,6 +9,7 @@
     <Property Name="cost" Type="int" />
     <Property Name="time" Type="nvarchar" MaxLength="50" />
     <Property Name="folder" Type="nvarchar" MaxLength="100" />
+    <Property Name="showTime" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "Kassir.dbo.Hall_1" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -23,6 +24,7 @@
     <Property Name="column4" Type="int" />
     <Property Name="column5" Type="int" />
     <Property Name="column6" Type="int" />
+    <Property Name="filmId" Type="int" />
   </EntityType>
   <EntityType Name="Stuff">
     <Key>
@@ -33,7 +35,7 @@
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone" Type="nvarchar" MaxLength="50" />
-    <Property Name="Gender" Type="nchar" MaxLength="10" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="Хранилище KassirModelContainer">
     <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
@@ -46,7 +48,8 @@
     [Hall_1].[column3] AS [column3], 
     [Hall_1].[column4] AS [column4], 
     [Hall_1].[column5] AS [column5], 
-    [Hall_1].[column6] AS [column6]
+    [Hall_1].[column6] AS [column6], 
+    [Hall_1].[filmId] AS [filmId]
     FROM [dbo].[Hall_1] AS [Hall_1]</DefiningQuery>
     </EntitySet>
   </EntityContainer>

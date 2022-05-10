@@ -21,5 +21,6 @@ namespace kursach_2022
         public Nullable<int> column4 { get; set; }
         public Nullable<int> column5 { get; set; }
         public Nullable<int> column6 { get; set; }
+        public Nullable<int> filmId { get; set; }
     }
 }

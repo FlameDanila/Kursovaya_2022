@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="KassirModel.Stuff" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="KassirModel.Films" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="KassirModel.Hall_1" Width="1.5" PointX="0.75" PointY="3.75" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

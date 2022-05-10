@@ -60,6 +60,7 @@ namespace kursach_2022
                         button.VerticalAlignment = VerticalAlignment.Top;
                         button.Background = Brushes.AliceBlue;
                         button.Content = "Свободно";
+                        button.Click += add_Click;
 
                         button.Margin = new Thickness(top, bottom, 0, 0);
                         grid.Children.Add(button);
@@ -91,6 +92,17 @@ namespace kursach_2022
             HallsMenu menu = new HallsMenu();
             menu.Show();
             Close();
+        }
+
+        public void add_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button.Content == "Свободно")
+            {
+
+                button.Content = "✓";
+            }
+            else { button.Content = "Свободно"; }
         }
     }
 }

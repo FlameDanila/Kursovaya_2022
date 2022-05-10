@@ -16,6 +16,7 @@
     <EntitySetMapping Name="Films">
       <EntityTypeMapping TypeName="KassirModel.Films">
         <MappingFragment StoreEntitySet="Films">
+          <ScalarProperty Name="showTime" ColumnName="showTime" />
           <ScalarProperty Name="folder" ColumnName="folder" />
           <ScalarProperty Name="time" ColumnName="time" />
           <ScalarProperty Name="cost" ColumnName="cost" />
@@ -27,6 +28,7 @@
     <EntitySetMapping Name="Hall_1">
       <EntityTypeMapping TypeName="KassirModel.Hall_1">
         <MappingFragment StoreEntitySet="Hall_1">
+          <ScalarProperty Name="filmId" ColumnName="filmId" />
           <ScalarProperty Name="column6" ColumnName="column6" />
           <ScalarProperty Name="column5" ColumnName="column5" />
           <ScalarProperty Name="column4" ColumnName="column4" />

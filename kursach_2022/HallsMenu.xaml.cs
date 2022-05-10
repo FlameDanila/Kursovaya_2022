@@ -35,13 +35,17 @@ namespace kursach_2022
             DataTable data = Select("SELECT TABLE_NAME AS [Название таблицы] FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'");
 
             List<string> listOfHalls = new List<string>();
+            List<string> list = new List<string>();
 
             for (int j = 0; j < data.Rows.Count; j++)
             {
                 if (data.Rows[j][0].ToString().ToLower().StartsWith("hall"))
                 {
                     listOfHalls.Add(data.Rows[j][0].ToString());
-                    App.hallId = j+2;
+                    App.hallId = j+1;
+                    //DataTable table = Select($"select name from films");
+                    //list.Add(table.Rows[j][0].ToString());
+                    //MessageBox.Show(table.Rows[j][0].ToString());
                 }
             }
 
@@ -186,15 +190,24 @@ namespace kursach_2022
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+            int randint = 1;
+
+            Random random = new Random();
+            randint = random.Next(1, 12);
+
             int id = App.hallId;
-            DataTable data = Select($"USE [Kassir] CREATE TABLE[dbo].[Hall_{id}]( [numberOfRow][int] IDENTITY(1, 1) NOT NULL," +
-                $" [column1][int] NULL, [column2][int] NULL, [column3][int] NULL, [column4][int] NULL, [column5][int] NULL, [column6][int] NULL ) ON[PRIMARY]" +
-                $"SET IDENTITY_INSERT [dbo].[Hall_{id}] ON INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6]) VALUES(1, 0, 0, 0, 0, 0, 0)" +
-                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6]) VALUES(2, 0, 0, 0, 0, 0, 0)"+
-                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6]) VALUES(3, 0, 0, 0, 0, 0, 0)"+
-                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6]) VALUES(4, 0, 0, 0, 0, 0, 0)"+
-                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6]) VALUES(5, 0, 0, 0, 0, 0, 0)"+
-                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6]) VALUES(6, 0, 0, 0, 0, 0, 0)");
+
+            MessageBox.Show(id.ToString());
+
+            DataTable data = Select($"USE [Kassir] CREATE TABLE[dbo].[Hall_{id}]( [numberOfRow][int] IDENTITY(1, 1) NOT NULL,"+
+                $" [column1][int] NULL, [column2][int] NULL, [column3][int] NULL, [column4][int] NULL, [column5][int] NULL, [column6][int] NULL, [filmId][int] NULL) "+ 
+                $"SET IDENTITY_INSERT [dbo].[Hall_{id}] ON "+
+                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6], [filmId]) VALUES(1, 0, 0, 0, 0, 0, 0, {randint})" +
+                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6], [filmId]) VALUES(2, 0, 0, 0, 0, 0, 0, {randint})" +
+                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6], [filmId]) VALUES(3, 0, 0, 0, 0, 0, 0, {randint})" +
+                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6], [filmId]) VALUES(4, 0, 0, 0, 0, 0, 0, {randint})" +
+                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6], [filmId]) VALUES(5, 0, 0, 0, 0, 0, 0, {randint})" +
+                $"INSERT[dbo].[Hall_{id}]([numberOfRow], [column1], [column2], [column3], [column4], [column5], [column6], [filmId]) VALUES(6, 0, 0, 0, 0, 0, 0, {randint})");
             Update();
         }
     }

@@ -22,7 +22,6 @@ namespace kursach_2022
         public Menu()
         {
             InitializeComponent();
-            korzinaButton.Content = "🛒 " + App.korzina;
         }
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -40,17 +39,16 @@ namespace kursach_2022
 
         private void ticketsButton_Click(object sender, RoutedEventArgs e)
         {
-
+            TicketWindow ticketWindow = new TicketWindow();
+            ticketWindow.Show();
+            Close();
         }
 
         private void changesButton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void korzinaButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            ChangesWindow changes = new ChangesWindow();
+            changes.Show();
+            Close();
         }
     }
 }

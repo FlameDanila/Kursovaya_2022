@@ -32,13 +32,6 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-                <Button x:Name="korzinaButton" FontSize="30" Margin="777,22,0,0" Content="..." Foreground="Black" Background="{x:Null}"  Width="91" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Click="korzinaButton_Click" BorderBrush="{x:Null}">
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="15"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
             </Grid>
         </Border>
     </Grid>
