@@ -89,6 +89,17 @@ namespace kursach_2022
 
         private void Film_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            var body = sender as Image;
+
+            MessageBox.Show(body.ToolTip.ToString());
+
+            var list = App.db.Films.Where(n => n.name == body.ToolTip.ToString()).ToList();
+
+            foreach (var i in list)
+            {
+                App.hallId = i.id;
+            }
+
             Halls menu = new Halls();
             menu.Show();
             Close();

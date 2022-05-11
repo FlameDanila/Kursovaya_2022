@@ -16,7 +16,7 @@ namespace kursach_2022
         public static KassirEntities db = new KassirEntities();
         public static string name = "";
         public static int korzina = 0;
-        public static int hallId = 0;
+        public static int hallId = 1;
         public static int userId = 0;
     }
 }

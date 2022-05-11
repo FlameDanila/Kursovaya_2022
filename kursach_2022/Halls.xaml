@@ -10,8 +10,8 @@
         <Border CornerRadius="40" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#FFDBE2EF" BorderBrush="#FF0F78BB" BorderThickness="1" Width="1124" Height="635">
             <Grid x:Name="grid" Width="900" Height="500" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,118,0,0">
             </Grid>
-        </Border> 
-        <Image HorizontalAlignment="Left" Height="97" Margin="946,51,0,0" VerticalAlignment="Top" Width="212" Source="images/logo2.png" Stretch="Fill" StretchDirection="Both" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
-        <TextBlock x:Name="hallText" HorizontalAlignment="Center" FontSize="50" Text="Зал 1" TextAlignment="Center" FontWeight="Bold" Margin="0,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="67" Width="449"/>
+        </Border>
+        <Image HorizontalAlignment="Left" Height="85" Margin="1003,60,0,0" VerticalAlignment="Top" Width="186" Source="images/logo2.png" Stretch="Fill" StretchDirection="Both" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+        <TextBlock x:Name="hallText" HorizontalAlignment="Center" FontSize="50" Text="Зал 1" TextAlignment="Center" FontWeight="Bold" Margin="0,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="85" MaxWidth="716" Width="auto"/>
     </Grid>
 </Window>

@@ -41,7 +41,7 @@
                     <ComboBoxItem Content="Женский" FontSize="20"/>
                 </ComboBox>
                 <TextBlock Margin="22,171,592,303" FontSize="24" TextAlignment="Center" FontFamily="Calibri"><Run Language="ru-ru" Text="Пароль"/></TextBlock>
-                <TextBox x:Name="RepeatPassBox" Margin="25,317,0,0" Text="" FontSize="30" FontFamily="Calibri" MinWidth="185" Width="auto" MaxWidth="300" Height="37" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="Black" TextAlignment="Center" HorizontalAlignment="Left" UndoLimit="1" MaxLength="20"/>
+                <PasswordBox x:Name="RepeatPassBox" Margin="25,317,0,0" FontSize="30" FontFamily="Calibri" MinWidth="185" Width="auto" MaxWidth="300" Height="37" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="Black" HorizontalAlignment="Left" MaxLength="20"/>
                 <Image HorizontalAlignment="Left" Height="47" Margin="336,35,0,0" VerticalAlignment="Top" Width="110" Source="Images/logo2.png" Stretch="Fill" StretchDirection="Both" MouseLeftButtonDown="Image_MouseLeftButtonDown" Cursor="UpArrow"/>
                 <TextBox x:Name="PasswordBox" Margin="22,209,0,0" Text="" FontSize="30" FontFamily="Calibri" MinWidth="185" Width="auto" MaxWidth="300" Height="37" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="Black" TextAlignment="Center" HorizontalAlignment="Left" UndoLimit="1" MaxLength="20" Visibility="Hidden"/>
                 <PasswordBox x:Name="MyPasswordBox" Margin="22,209,0,0" FontSize="30" FontFamily="Calibri" MinWidth="185" Width="auto" MaxWidth="300" Height="37" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="Black" HorizontalAlignment="Left" MaxLength="20"/>

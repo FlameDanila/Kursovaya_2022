@@ -32,21 +32,17 @@ namespace kursach_2022
         {
             grid.Children.Clear();
 
-            DataTable data = Select("SELECT TABLE_NAME AS [Название таблицы] FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE'");
+            DataTable data = Select("SELECT TABLE_NAME AS [Название таблицы] FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' and TABLE_NAME like 'hall_%'");
+            DataTable table = Select($"select name from films");
 
             List<string> listOfHalls = new List<string>();
             List<string> list = new List<string>();
 
             for (int j = 0; j < data.Rows.Count; j++)
-            {
-                if (data.Rows[j][0].ToString().ToLower().StartsWith("hall"))
-                {
-                    listOfHalls.Add(data.Rows[j][0].ToString());
-                    App.hallId = j+1;
-                    //DataTable table = Select($"select name from films");
-                    //list.Add(table.Rows[j][0].ToString());
-                    //MessageBox.Show(table.Rows[j][0].ToString());
-                }
+            {     
+                listOfHalls.Add(data.Rows[j][0].ToString());
+                App.hallId = j+1;
+                list.Add(App.db.Films.Where(n => n.id == Convert.ToInt32(table.Rows[j][0])).ToString());
             }
 
             int top = 80;
@@ -69,12 +65,13 @@ namespace kursach_2022
                         button.VerticalAlignment = VerticalAlignment.Top;
                         button.Background = null;
                         button.Content = "Зал " + counter;
-                        button.FontSize = 40;
+                        button.ToolTip = list[counter-1];
                         button.BorderThickness = new Thickness(5);
                         button.Foreground = Brushes.Black;
                         button.BorderBrush = (Brush)new BrushConverter().ConvertFrom("#FF0365CF");
                         button.Margin = new Thickness(top, bottom, 0, 0);
                         button.MouseRightButtonDown += Dell_Click;
+                        button.FontSize = 30;
 
                         button.Click += Hall_Click;
 
@@ -162,10 +159,17 @@ namespace kursach_2022
             string f = sender.ToString();
             string[] mass = f.Split(' ');
 
-            if (MessageBox.Show("Вы точно хотите удалить эту таблицу?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) { }
+            if (MessageBox.Show("Вы точно хотите удалить этот зал?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) { }
             else
             {
-                DataTable dataTable = Select($"drop table Hall_{mass[2]}");
+                if (Convert.ToInt32(mass[2]) == 1)
+                {
+                    MessageBox.Show("Нельзя удалять зал, пока в нём проходит сеанс");
+                }
+                else
+                {
+                    DataTable dataTable = Select($"drop table Hall_{mass[2]}");
+                }
             }
             Update();
         }
@@ -190,14 +194,65 @@ namespace kursach_2022
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
+
+            DataTable table = Select("SELECT TABLE_NAME AS [Название таблицы] FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' and TABLE_NAME like 'hall_%'");
+
+            List<int> childfilms = new List<int>();
+            DataTable filmsId = Select("select id from films where showTime < '18:00:00'");
+            DataTable filmsId2 = Select("select id from films where showTime >= '18:00:00' and showTime < '20:00:00'");
+            DataTable filmsId3 = Select("select id from films where showTime >= '20:00:00'");
+
+            for (int g = 0; g < filmsId.Rows.Count; g++)
+            {
+                childfilms.Add(Convert.ToInt32(filmsId.Rows[g][0]));
+            }
+
+            List<int> middlefilms = new List<int>();
+
+            for (int g = 0; g < filmsId2.Rows.Count; g++)
+            {
+                middlefilms.Add(Convert.ToInt32(filmsId2.Rows[g][0]));
+            }
+
+            List<int> oldfilms = new List<int>();
+
+            for (int g = 0; g < filmsId3.Rows.Count; g++)
+            {
+                oldfilms.Add(Convert.ToInt32(filmsId3.Rows[g][0]));
+            }
+
+            List<int> listOfHalls = new List<int>();
+
+            for (int j = 0; j < table.Rows.Count; j++)
+            {
+                listOfHalls.Add(Convert.ToInt32(table.Rows[j][0].ToString().Replace("Hall_","")));
+                App.hallId = listOfHalls[j]+1;
+            }
+
+            DataTable film = Select("select id from Films");
+
+            List<string> filmidList = new List<string>();
+
+            for (int i = 0; i < film.Rows.Count; i++)
+            {
+                filmidList.Add(film.Rows[i][0].ToString());
+            }
+
             int randint = 1;
 
-            Random random = new Random();
-            randint = random.Next(1, 12);
-
+            if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+            {
+                randint = childfilms[listOfHalls.Count / childfilms.Count];
+            }
+            else if (DateTime.Now.Hour > 12 && DateTime.Now.Hour <= 18)
+            {
+                randint = middlefilms[listOfHalls.Count / middlefilms.Count];
+            }
+            else
+            {
+                randint = oldfilms[listOfHalls.Count / oldfilms.Count];
+            }
             int id = App.hallId;
-
-            MessageBox.Show(id.ToString());
 
             DataTable data = Select($"USE [Kassir] CREATE TABLE[dbo].[Hall_{id}]( [numberOfRow][int] IDENTITY(1, 1) NOT NULL,"+
                 $" [column1][int] NULL, [column2][int] NULL, [column3][int] NULL, [column4][int] NULL, [column5][int] NULL, [column6][int] NULL, [filmId][int] NULL) "+ 

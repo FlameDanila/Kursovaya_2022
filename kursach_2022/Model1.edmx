@@ -14,7 +14,7 @@
           <Property Name="cost" Type="int" />
           <Property Name="time" Type="nvarchar" MaxLength="50" />
           <Property Name="folder" Type="nvarchar" MaxLength="100" />
-          <Property Name="showTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="showTime" Type="time" Precision="4" />
         </EntityType>
         <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "Kassir.dbo.Hall_1" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
@@ -64,8 +64,8 @@
       <Schema Namespace="KassirModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="KassirEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="Stuff" EntityType="KassirModel.Stuff" />
-          <EntitySet Name="Films" EntityType="KassirModel.Films" />
           <EntitySet Name="Hall_1" EntityType="KassirModel.Hall_1" />
+          <EntitySet Name="Films" EntityType="KassirModel.Films" />
           </EntityContainer>
         <EntityType Name="Stuff">
           <Key>
@@ -77,17 +77,6 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Films">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cost" Type="Int32" />
-          <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="folder" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="showTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Hall_1">
           <Key>
@@ -101,6 +90,17 @@
           <Property Name="column5" Type="Int32" />
           <Property Name="column6" Type="Int32" />
           <Property Name="filmId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cost" Type="Int32" />
+          <Property Name="time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="folder" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="showTime" Type="Time" Precision="4" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -120,18 +120,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Films">
-            <EntityTypeMapping TypeName="KassirModel.Films">
-              <MappingFragment StoreEntitySet="Films">
-                <ScalarProperty Name="showTime" ColumnName="showTime" />
-                <ScalarProperty Name="folder" ColumnName="folder" />
-                <ScalarProperty Name="time" ColumnName="time" />
-                <ScalarProperty Name="cost" ColumnName="cost" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Hall_1">
             <EntityTypeMapping TypeName="KassirModel.Hall_1">
               <MappingFragment StoreEntitySet="Hall_1">
@@ -143,6 +131,18 @@
                 <ScalarProperty Name="column2" ColumnName="column2" />
                 <ScalarProperty Name="column1" ColumnName="column1" />
                 <ScalarProperty Name="numberOfRow" ColumnName="numberOfRow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="KassirModel.Films">
+              <MappingFragment StoreEntitySet="Films">
+                <ScalarProperty Name="showTime" ColumnName="showTime" />
+                <ScalarProperty Name="folder" ColumnName="folder" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

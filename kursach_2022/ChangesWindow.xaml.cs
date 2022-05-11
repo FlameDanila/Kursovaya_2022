@@ -55,7 +55,7 @@ namespace kursach_2022
             {
                 if (oldPassText.Text == "")
                 {
-                    MessageBox.Show("Чтобы сохранить изменения введите пароль");
+                    MessageBox.Show("Чтобы сохранить изменения введите старый пароль");
                 }
                 else
                 {
@@ -64,7 +64,7 @@ namespace kursach_2022
             }
             else
             {
-                if (PasswordBox.Text != RepeatPassBox.Text)
+                if (PasswordBox.Text != RepeatPassBox.Password)
                 { MessageBox.Show("Пароли должны совпадать!"); }
                 else
                 {
@@ -73,7 +73,14 @@ namespace kursach_2022
                     stuff.Name = LastNameBox.Text.Replace(" ", "") + " " + FirstNameBox.Text.Replace(" ", "") + " " + MiddleNameBox.Text.Replace(" ", "");
                     stuff.Phone = PhoneBox.Text.Replace(" ", "");
                     stuff.Login = LoginBox.Text.Replace(" ", "");
-                    stuff.Password = PasswordBox.Text.Replace(" ", "");
+                    if (PasswordBox.Text != "")
+                    {
+                        stuff.Password = PasswordBox.Text.Replace(" ", "");
+                    }
+                    else
+                    {
+                        stuff.Password = stuff.Password;
+                    }
                     stuff.Gender = FloorCombo.Text;
 
                     App.db.SaveChanges();

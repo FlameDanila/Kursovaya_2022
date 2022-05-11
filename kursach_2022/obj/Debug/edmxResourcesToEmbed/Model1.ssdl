@@ -9,7 +9,7 @@
     <Property Name="cost" Type="int" />
     <Property Name="time" Type="nvarchar" MaxLength="50" />
     <Property Name="folder" Type="nvarchar" MaxLength="100" />
-    <Property Name="showTime" Type="nvarchar" MaxLength="50" />
+    <Property Name="showTime" Type="time" Precision="4" />
   </EntityType>
   <!--Ошибки, обнаруженные при создании:
 предупреждение 6002: В таблице или представлении "Kassir.dbo.Hall_1" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->

@@ -19,6 +19,6 @@ namespace kursach_2022
         public Nullable<int> cost { get; set; }
         public string time { get; set; }
         public string folder { get; set; }
-        public string showTime { get; set; }
+        public Nullable<System.TimeSpan> showTime { get; set; }
     }
 }

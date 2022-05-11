@@ -26,16 +26,20 @@ namespace kursach_2022
         {
             InitializeComponent();
 
-            hallText.Text = "Зал " + App.hallId;
-
             DataTable data = Select($"select * from dbo.hall_{App.hallId}");
+
+            var nameid = App.db.Films.Where(n => n.id == App.hallId);
+            foreach (var item in nameid)
+            {
+                hallText.Text = item.name;
+            }
 
             int top = 150;
             int bottom = 18;
 
             for (int j = 0; j < data.Rows.Count; j++)
             {
-                for (int i = 1; i < data.Columns.Count; i++)
+                for (int i = 1; i < data.Columns.Count-1; i++)
                 {
                     if (data.Rows[j][i].Equals(1))
                     {
