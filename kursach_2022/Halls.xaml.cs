@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using word = Microsoft.Office.Interop.Word;
 
 namespace kursach_2022
 {
@@ -22,6 +23,7 @@ namespace kursach_2022
     /// </summary>
     public partial class Halls : Window
     {
+        public int counter = 0;
         public Halls()
         {
             InitializeComponent();
@@ -39,10 +41,11 @@ namespace kursach_2022
 
             int top = 150;
             int bottom = 18;
+            int schetchik = 1;
 
             for (int j = 0; j < data.Rows.Count; j++)
             {
-                for (int i = 1; i < data.Columns.Count-1; i++)
+                for (int i = 1; i < data.Columns.Count - 1; i++)
                 {
                     if (data.Rows[j][i].Equals(1))
                     {
@@ -53,10 +56,12 @@ namespace kursach_2022
                         button.VerticalAlignment = VerticalAlignment.Top;
                         button.Content = "Забронировано";
                         button.FontSize = 10;
+                        button.Name = "button_" + schetchik;
 
                         button.Margin = new Thickness(top, bottom, 0, 0);
                         grid.Children.Add(button);
                         top += 100;
+                        counter++;
                     }
                     else
                     {
@@ -68,10 +73,12 @@ namespace kursach_2022
                         button.Background = Brushes.AliceBlue;
                         button.Content = "Свободно";
                         button.Click += add_Click;
+                        button.Name = "button_" + schetchik;
 
                         button.Margin = new Thickness(top, bottom, 0, 0);
                         grid.Children.Add(button);
                         top += 100;
+                        schetchik++;
                     }
                 }
                 top = 150;
@@ -88,7 +95,6 @@ namespace kursach_2022
 
             string[] vs = text.Split('"');
 
-            //SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=No;DataBase=Kassir;User=ws1;PWD=ws1");
             SqlConnection sqlConnection = new SqlConnection($"server = {vs[1]};Trusted_connection={vs[3]};DataBase={vs[5]};User={vs[7]};PWD={vs[9]}");
             sqlConnection.Open();
 
@@ -99,7 +105,7 @@ namespace kursach_2022
             sqlDataAdapter.Fill(data);
 
             return data;
-        }
+        } 
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -113,10 +119,37 @@ namespace kursach_2022
             Button button = sender as Button;
             if (button.Content == "Свободно")
             {
-
                 button.Content = "✓";
+                counter++;
+                App.buttons += button.Name + " ";
             }
-            else { button.Content = "Свободно"; }
+            else { button.Content = "Свободно"; counter--; App.buttons.Replace(button.Name + " ", ""); }
+
+            costText.Text = (App.filmcost * counter).ToString() + " Рублей";
+        }
+
+        private void BuyButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (MessageBox.Show($"Вы точно хотите приобрести {counter} билетов за {costText.Text}?", "Уверены?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) { }
+            else
+            {
+                for (int i = 0; i < counter; i++)
+                {
+                    var application = new word.Application();
+                    word.Document document = application.Documents.Add();
+
+                    word.Paragraph nameParagraph = document.Paragraphs.Add();
+                    word.Range nameRange = nameParagraph.Range;
+
+                    nameRange.Text = "Название фильма " + App.filname + "\n" + " Стоимость " + App.filmcost + "\n" + " Длительность " + App.filmTime;
+                    nameRange.Font.Size = 30;
+                    nameRange.Font.Position = (int)Orientation.Horizontal;
+
+                    application.Visible = true;
+                    document.SaveAs2($@"Ticket-{i+1}.doc", FileMode.OpenOrCreate);
+                }
+            }
         }
     }
 }

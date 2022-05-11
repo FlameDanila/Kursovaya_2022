@@ -161,7 +161,6 @@ namespace kursach_2022
 
             string[] vs = text.Split('"');
 
-            //SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=No;DataBase=Kassir;User=ws1;PWD=ws1");
             SqlConnection sqlConnection = new SqlConnection($"server = {vs[1]};Trusted_connection={vs[3]};DataBase={vs[5]};User={vs[7]};PWD={vs[9]}");
             sqlConnection.Open();
 
@@ -203,13 +202,22 @@ namespace kursach_2022
 
         private void Hall_Click(object sender, RoutedEventArgs e)
         {
-            string f = sender.ToString();
-            string[] mass = f.Split(' ');
-            App.hallId = Convert.ToInt32(mass[2]);
+            if (App.filmcost == 0)
+            {
+                TicketWindow ticketWindow = new TicketWindow();
+                ticketWindow.Show();
+                Close();
+            }
+            else
+            {
+                string f = sender.ToString();
+                string[] mass = f.Split(' ');
+                App.hallId = Convert.ToInt32(mass[2]);
 
-            Halls halls = new Halls();
-            halls.Show();
-            Close();
+                Halls halls = new Halls();
+                halls.Show();
+                Close();
+            }
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)

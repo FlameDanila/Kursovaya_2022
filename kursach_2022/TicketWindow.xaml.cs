@@ -82,7 +82,6 @@ namespace kursach_2022
 
             string[] vs = text.Split('"');
 
-            //SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=No;DataBase=Kassir;User=ws1;PWD=ws1");
             SqlConnection sqlConnection = new SqlConnection($"server = {vs[1]};Trusted_connection={vs[3]};DataBase={vs[5]};User={vs[7]};PWD={vs[9]}");
             sqlConnection.Open();
 
@@ -99,17 +98,45 @@ namespace kursach_2022
         {
             var body = sender as Image;
 
-            var list = App.db.Films.Where(n => n.name == body.ToolTip.ToString()).ToList();
+            App.swich = 0;
 
-            foreach (var i in list)
-            {
-                App.filname = body.ToolTip.ToString();
-                App.hallId = i.id;
+            DataTable dataTable = Select("select TABLE_NAME from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME like 'hall_%'");
+            List<string> listOfHalls = new List<string>();
+
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            { 
+                listOfHalls.Add(dataTable.Rows[i][0].ToString());
             }
 
-            Halls menu = new Halls();
-            menu.Show();
-            Close();
+            for (int i = 0; i<listOfHalls.Count; i++)
+            {
+                if (App.swich == 0)
+                {
+                    DataTable data = Select($"select filmid from {listOfHalls[i]}");
+                    DataTable filmname = Select($"select * from films");
+                    App.filname = body.ToolTip.ToString();
+
+                    for (int b = 0; b < filmname.Rows.Count; b++)
+                    {
+                        if (filmname.Rows[b][1].ToString() == App.filname)
+                        {
+                            if (data.Rows[0][0].ToString() == filmname.Rows[b][0].ToString())
+                            {
+                                App.filmcost = Convert.ToInt32(filmname.Rows[b][2].ToString());
+                                App.showTimeFilm = filmname.Rows[b][5].ToString();
+                                App.filmTime = filmname.Rows[b][3].ToString();
+                                App.hallId = i + 1;
+                                App.swich = 1;
+                                Halls menu = new Halls();
+                                menu.Show();
+                                Close();
+                                break;
+                            }
+                        }
+                    }
+                }
+                else { break; }
+            }
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
