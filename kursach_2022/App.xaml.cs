@@ -23,6 +23,8 @@ namespace kursach_2022
         public static int filmcost = 0;
         public static string filmTime = "";
         public static string showTimeFilm = "";
-        public static string buttons = "";
+        public static string buttonsColumn = "";
+        public static string buttonsRow = "";
+        public static Hall_1 hall = new Hall_1();
     }
 }

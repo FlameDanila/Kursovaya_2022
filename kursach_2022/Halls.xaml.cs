@@ -41,7 +41,7 @@ namespace kursach_2022
 
             int top = 150;
             int bottom = 18;
-            int schetchik = 1;
+            int schetchik = 0;
 
             for (int j = 0; j < data.Rows.Count; j++)
             {
@@ -56,12 +56,11 @@ namespace kursach_2022
                         button.VerticalAlignment = VerticalAlignment.Top;
                         button.Content = "Забронировано";
                         button.FontSize = 10;
-                        button.Name = "button_" + schetchik;
 
                         button.Margin = new Thickness(top, bottom, 0, 0);
                         grid.Children.Add(button);
                         top += 100;
-                        counter++;
+                        schetchik++;
                     }
                     else
                     {
@@ -73,7 +72,7 @@ namespace kursach_2022
                         button.Background = Brushes.AliceBlue;
                         button.Content = "Свободно";
                         button.Click += add_Click;
-                        button.Name = "button_" + schetchik;
+                        button.Name = "d" + (j+1) + "s" + (i);
 
                         button.Margin = new Thickness(top, bottom, 0, 0);
                         grid.Children.Add(button);
@@ -117,19 +116,41 @@ namespace kursach_2022
         public void add_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            if (button.Content == "Свободно")
+            if (button.Content.Equals("Свободно"))
             {
                 button.Content = "✓";
                 counter++;
-                App.buttons += button.Name + " ";
+                App.buttonsColumn += button.Name + " ";
             }
-            else { button.Content = "Свободно"; counter--; App.buttons.Replace(button.Name + " ", ""); }
+            else if (button.Content.Equals("✓"))
+            {
+                button.Content = "Свободно";
+                counter--;
+                App.buttonsColumn.Replace(button.Name + " ", ""); 
+            }
 
             costText.Text = (App.filmcost * counter).ToString() + " Рублей";
         }
 
         private void BuyButton_Click(object sender, RoutedEventArgs e)
         {
+            string[] buttonId = App.buttonsColumn.Split(' ');
+
+            for (int i = 0; i < buttonId.Count() - 1; i++)
+            {
+                string[] vs = buttonId[i].Split('d');
+                string text = "";
+
+                for (int j = 1; j <= vs.Count(); j += 2)
+                {
+                    text += vs[j];
+                    string[] textSplit = text.Split('s');
+                    for (int h = 0; h < textSplit.Count(); h += 2)
+                    {
+                        DataTable data = Select($"UPDATE Hall_{App.hallId} SET column{textSplit[h+1]} = REPLACE(column{textSplit[h+1]}, '0', '1') WHERE numberOfRow = '{textSplit[h]}'");
+                    }
+                }
+            }
 
             if (MessageBox.Show($"Вы точно хотите приобрести {counter} билетов за {costText.Text}?", "Уверены?", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) { }
             else
@@ -142,9 +163,9 @@ namespace kursach_2022
                     word.Paragraph nameParagraph = document.Paragraphs.Add();
                     word.Range nameRange = nameParagraph.Range;
 
-                    nameRange.Text = "Название фильма " + App.filname + "\n" + " Стоимость " + App.filmcost + "\n" + " Длительность " + App.filmTime;
+                    nameRange.Text = "Название фильма " + App.filname + "\n" + "Стоимость " + App.filmcost + "\n" + "Длительность " + App.filmTime + "\n" + "Время сеанса от " + App.showTimeFilm;
                     nameRange.Font.Size = 30;
-                    nameRange.Font.Position = (int)Orientation.Horizontal;
+                    nameRange.Collapse(word.WdCollapseDirection.wdCollapseEnd);
 
                     application.Visible = true;
                     document.SaveAs2($@"Ticket-{i+1}.doc", FileMode.OpenOrCreate);
