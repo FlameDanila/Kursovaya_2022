@@ -26,9 +26,12 @@ namespace kursach_2022
         {
             InitializeComponent();
 
-            DataTable data = Select($"select * from dbo.hall_{App.hallId}");
+            DataTable data = Select($"select * from hall_{App.hallId}");
 
-            var nameid = App.db.Films.Where(n => n.id == App.hallId);
+            string f = data.Rows[0][7].ToString();
+            int m = Convert.ToInt32(f);
+
+            var nameid = App.db.Films.Where(n => n.id == m);
             foreach (var item in nameid)
             {
                 hallText.Text = item.name;
@@ -79,7 +82,14 @@ namespace kursach_2022
         {
             DataTable data = new DataTable("dataBase");
 
-            SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=Yes;DataBase=Kassir");
+            string path = "ConnectionString.txt";
+
+            string text = File.ReadAllText(path);
+
+            string[] vs = text.Split('"');
+
+            //SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=No;DataBase=Kassir;User=ws1;PWD=ws1");
+            SqlConnection sqlConnection = new SqlConnection($"server = {vs[1]};Trusted_connection={vs[3]};DataBase={vs[5]};User={vs[7]};PWD={vs[9]}");
             sqlConnection.Open();
 
             SqlCommand sqlCommand = sqlConnection.CreateCommand();

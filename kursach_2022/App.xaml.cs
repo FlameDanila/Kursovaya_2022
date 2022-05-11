@@ -18,5 +18,6 @@ namespace kursach_2022
         public static int korzina = 0;
         public static int hallId = 1;
         public static int userId = 0;
+        public static string filname = "";
     }
 }

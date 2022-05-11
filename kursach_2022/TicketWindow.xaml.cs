@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,7 +76,14 @@ namespace kursach_2022
         {
             DataTable data = new DataTable("dataBase");
 
-            SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=Yes;DataBase=Kassir");
+            string path = "ConnectionString.txt";
+
+            string text = File.ReadAllText(path);
+
+            string[] vs = text.Split('"');
+
+            //SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=No;DataBase=Kassir;User=ws1;PWD=ws1");
+            SqlConnection sqlConnection = new SqlConnection($"server = {vs[1]};Trusted_connection={vs[3]};DataBase={vs[5]};User={vs[7]};PWD={vs[9]}");
             sqlConnection.Open();
 
             SqlCommand sqlCommand = sqlConnection.CreateCommand();
@@ -91,12 +99,11 @@ namespace kursach_2022
         {
             var body = sender as Image;
 
-            MessageBox.Show(body.ToolTip.ToString());
-
             var list = App.db.Films.Where(n => n.name == body.ToolTip.ToString()).ToList();
 
             foreach (var i in list)
             {
+                App.filname = body.ToolTip.ToString();
                 App.hallId = i.id;
             }
 

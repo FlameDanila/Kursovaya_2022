@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace kursach_2022
     /// </summary>
     public partial class HallsMenu : Window
     {
+        public int number = 0;
         public HallsMenu()
         {
             InitializeComponent();
@@ -33,29 +35,31 @@ namespace kursach_2022
             grid.Children.Clear();
 
             DataTable data = Select("SELECT TABLE_NAME AS [Название таблицы] FROM INFORMATION_SCHEMA.TABLES WHERE table_type = 'BASE TABLE' and TABLE_NAME like 'hall_%'");
-            DataTable table = Select($"select name from films");
+
+            DataTable table = Select("select name from films");
+
+            DataTable hallsTable = new DataTable();
 
             List<string> listOfHalls = new List<string>();
             List<string> list = new List<string>();
 
             for (int j = 0; j < data.Rows.Count; j++)
-            {     
+            {
                 listOfHalls.Add(data.Rows[j][0].ToString());
-                App.hallId = j+1;
-                list.Add(App.db.Films.Where(n => n.id == Convert.ToInt32(table.Rows[j][0])).ToString());
+                App.hallId = j + 1;
             }
 
             int top = 80;
             int bottom = 33;
 
-            int counter = 1;
+            int counter = 0;
             int enabled = 0;
 
             for (int i = 1; i < 4; i++)
             {
                 for (int g = 1; g < 4; g++)
                 {
-                    if (listOfHalls.Count >= counter)
+                    if (listOfHalls.Count > counter)
                     {
                         Button button = new Button();
 
@@ -64,8 +68,18 @@ namespace kursach_2022
                         button.HorizontalAlignment = HorizontalAlignment.Left;
                         button.VerticalAlignment = VerticalAlignment.Top;
                         button.Background = null;
-                        button.Content = "Зал " + counter;
-                        button.ToolTip = list[counter-1];
+                        button.Content = "Зал " + (counter+1);
+
+                        hallsTable = Select($"select filmid from hall_{counter + 1}");
+
+                        List<int> filmidformhalls = new List<int>();
+                        filmidformhalls.Clear();
+                        filmidformhalls.Add(Convert.ToInt32(hallsTable.Rows[0][0]));
+                        DataTable dataTable = Select($"select name from films where id = {filmidformhalls[0]}");
+
+                        list.Add(dataTable.Rows[0][0].ToString());
+
+                        button.ToolTip = list[counter];
                         button.BorderThickness = new Thickness(5);
                         button.Foreground = Brushes.Black;
                         button.BorderBrush = (Brush)new BrushConverter().ConvertFrom("#FF0365CF");
@@ -141,8 +155,14 @@ namespace kursach_2022
         {
             DataTable data = new DataTable("dataBase");
 
+            string path = "ConnectionString.txt";
+
+            string text = File.ReadAllText(path);
+
+            string[] vs = text.Split('"');
+
             //SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=No;DataBase=Kassir;User=ws1;PWD=ws1");
-            SqlConnection sqlConnection = new SqlConnection($@"server = DESKTOP-ITVEB8Q\SQLEXPRESS;Trusted_connection=Yes;DataBase=Kassir");
+            SqlConnection sqlConnection = new SqlConnection($"server = {vs[1]};Trusted_connection={vs[3]};DataBase={vs[5]};User={vs[7]};PWD={vs[9]}");
             sqlConnection.Open();
 
             SqlCommand sqlCommand = sqlConnection.CreateCommand();
@@ -229,28 +249,35 @@ namespace kursach_2022
                 App.hallId = listOfHalls[j]+1;
             }
 
-            DataTable film = Select("select id from Films");
-
-            List<string> filmidList = new List<string>();
-
-            for (int i = 0; i < film.Rows.Count; i++)
-            {
-                filmidList.Add(film.Rows[i][0].ToString());
-            }
-
             int randint = 1;
 
             if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
             {
-                randint = childfilms[listOfHalls.Count / childfilms.Count];
+                randint = childfilms[number];
+                number++;
+                if (number == childfilms.Count)
+                {
+                    number = 0;
+                }
+
             }
-            else if (DateTime.Now.Hour > 12 && DateTime.Now.Hour <= 18)
+            if (DateTime.Now.Hour > 12 && DateTime.Now.Hour <= 18)
             {
-                randint = middlefilms[listOfHalls.Count / middlefilms.Count];
+                randint = middlefilms[number];
+                number++;
+                if (number == middlefilms.Count)
+                {
+                    number = 0;
+                }
             }
-            else
+            if (DateTime.Now.Hour > 18)
             {
-                randint = oldfilms[listOfHalls.Count / oldfilms.Count];
+                randint = oldfilms[number];
+                number++;
+                if (number == oldfilms.Count)
+                {
+                    number = 0;
+                }
             }
             int id = App.hallId;
 
