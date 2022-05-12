@@ -259,10 +259,11 @@ namespace kursach_2022
 
             int randint = 1;
 
-            if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+            if (DateTime.Now.Hour <= 12 && DateTime.Now.Hour < 18)
             {
                 randint = childfilms[number];
                 number++;
+                MessageBox.Show(childfilms[number].ToString());
                 if (number == childfilms.Count)
                 {
                     number = 0;
