@@ -25,9 +25,13 @@ namespace kursach_2022
         }
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            Close();
+            if (MessageBox.Show("Вы точно хотите выйти из аккаунта?", "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) { }
+            else
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                Close();
+            }
         }
 
         private void hallsButton_Click(object sender, RoutedEventArgs e)

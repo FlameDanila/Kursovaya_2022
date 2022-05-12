@@ -27,7 +27,11 @@ namespace kursach_2022
         public Halls()
         {
             InitializeComponent();
+            Update();
+        }
 
+        public void Update()
+        {
             DataTable data = Select($"select * from hall_{App.hallId}");
 
             string f = data.Rows[0][7].ToString();
@@ -72,7 +76,7 @@ namespace kursach_2022
                         button.Background = Brushes.AliceBlue;
                         button.Content = "Свободно";
                         button.Click += add_Click;
-                        button.Name = "d" + (j+1) + "s" + (i);
+                        button.Name = "d" + (j + 1) + "s" + (i);
 
                         button.Margin = new Thickness(top, bottom, 0, 0);
                         grid.Children.Add(button);
@@ -171,6 +175,7 @@ namespace kursach_2022
                     document.SaveAs2($@"Ticket-{i+1}.doc", FileMode.OpenOrCreate);
                 }
             }
+            Update();
         }
     }
 }
